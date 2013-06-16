@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:tf="http://twiliofaces.org/twiliofaces" lang="en">
+
+<h:head>
+	<title>Twilio Client Call</title>
+	<tf:jsClient token="#{twilioJsController.jsToken}" debug="true"
+		rtc="true">
+		<f:facet name="ready">
+		 	 $("#log").text("Client 'twiliofaces' is ready");
+		</f:facet>
+		<f:facet name="offline">
+		 $('#status').text('Offline');
+		</f:facet>
+		<f:facet name="incoming">
+			 $("#log").text("Incoming connection from " + incoming.parameters.From);
+       		// accept the incoming connection and start two-way audio
+       		if (confirm('Accept incoming call from ' + incoming.parameters.From + '?')){ 
+					incoming.accept();
+			} 
+		</f:facet>
+		<f:facet name="cancel"></f:facet>
+		<f:facet name="connect">
+		 	$("#log").text("Successfully established call");
+		</f:facet>
+		<f:facet name="disconnect">
+		 	$("#log").text("Call ended");
+		</f:facet>
+		<f:facet name="presence">
+				 if (presence.available) {
+          			// create an item for the client that became available
+         		 	$("<li />", {id: presence.from, text: presence.from}).click(function () { $("#number").val(presence.from); callNumber();
+					}).prependTo("#people"); 
+				} 
+				else { 
+					// find the item by client name and remove it 
+					$("#" + presence.from).remove(); 
+				}
+		</f:facet>
+		<f:facet name="error">
+			$("#log").text("Error: " + error.message);
+		</f:facet>
+		<f:facet name="javascript">
+      	
+      	function callNumber() {
+	        // get the phone number or client to connect the call to
+	        // This will get passed through to the Voice URL
+	        // (http://example.com/path-to-servlet/voice). That URL will
+	        // Dial the correct number
+	         params = {"PhoneNumber": $("#number").val()};
+	        Twilio.Device.connect(params);
+      	}
+  
+      	function hangup() {
+        	Twilio.Device.disconnectAll();
+      	}
+    	</f:facet>
+	</tf:jsClient>
+</h:head>
+<h:body>
+	welcome #{loginController.userRegistration.fullName}<br/>
+	<button class="call" onclick="callNumber();">Call</button>
+
+	<button class="hangup" onclick="hangup();">Hangup</button>
+
+	<input type="text" id="number" name="number"
+		placeholder="Enter a phone number to call" />
+
+	<div id="log">...</div>
+	<br />
+	<ul id="people" />
+	<br />
+	<a href="../logout.jsp">logout</a>
+</h:body>
+</html>

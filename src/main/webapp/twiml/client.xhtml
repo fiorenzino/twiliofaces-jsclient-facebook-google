@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:tf="http://twiliofaces.org/twiliofaces">
+	<f:event type="preRenderView" listener="#{logController.log}" />
+	<tf:response>
+		<tf:dial callerId="#{param.From}"
+			rendered="#{not twimlClientController.isClient()}">
+			<tf:client value="#{param.PhoneNumber}"></tf:client>
+		</tf:dial>
+
+		<tf:dial callerId="#{twimlClientController.twilioNumber}"
+			rendered="#{twimlClientController.isClient()}">
+			<tf:number value="#{param.PhoneNumber}"></tf:number>
+		</tf:dial>
+	</tf:response>
+</f:view>

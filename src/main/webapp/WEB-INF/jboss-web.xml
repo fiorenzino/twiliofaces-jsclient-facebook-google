@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-web>
+	<context-root>twiliofaces-jsclient-facebook-google</context-root>
+	<security-domain>external_auth</security-domain>
+	<valve>
+		<class-name>org.picketlink.social.auth.ExternalAuthenticator
+		</class-name>
+		<param>
+			<param-name>returnURL</param-name>
+			<param-value>${RETURN_URL::http://XXXXXXXX/twiliofaces-jsclient-facebook-google/twiliojs/index.jsf}
+			</param-value>
+		</param>
+		<param>
+			<param-name>scope</param-name>
+			<param-value>${SCOPE::email}</param-value>
+		</param>
+		<param>
+			<param-name>clientID</param-name>
+			<param-value>${CLIENT_ID::XXXX}</param-value>
+		</param>
+		<param>
+			<param-name>clientSecret</param-name>
+			<param-value>${CLIENT_SECRET::XXXX}
+			</param-value>
+		</param>
+		<param>
+			<param-name>roleString</param-name>
+			<param-value>${ROLE_STRING::user}</param-value>
+		</param>
+	</valve>
+	<valve>
+		<class-name>org.picketlink.social.reg.RegistrationValve</class-name>
+	</valve>
+</jboss-web>
