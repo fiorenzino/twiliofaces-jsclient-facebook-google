@@ -4,8 +4,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.twiliofaces.annotations.configuration.TwilioNumber;
-import org.twiliofaces.annotations.notification.PhoneNumber;
+import org.twiliofaces.inject.configuration.TwilioNumber;
+import org.twiliofaces.inject.notification.PhoneNumber;
 
 @Named
 @RequestScoped

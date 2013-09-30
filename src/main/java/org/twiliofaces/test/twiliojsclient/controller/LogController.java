@@ -5,9 +5,9 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.twiliofaces.annotations.TwilioRequestParams;
-import org.twiliofaces.api.event.TwimlEvent;
-import org.twiliofaces.request.pojo.TwilioRequestMap;
+import org.twiliofaces.cdi.event.TwimlEvent;
+import org.twiliofaces.cdi.producer.util.TwilioRequestMap;
+import org.twiliofaces.inject.notification.TwilioRequestParams;
 
 @Named
 @RequestScoped

@@ -6,8 +6,8 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.twiliofaces.annotations.configuration.TwilioClientToken;
-import org.twiliofaces.annotations.configuration.TwilioNumber;
+import org.twiliofaces.inject.configuration.TwilioCapabilityToken;
+import org.twiliofaces.inject.configuration.TwilioNumber;
 
 @SessionScoped
 @Named
@@ -17,7 +17,7 @@ public class TwilioJsController implements Serializable
    private static final long serialVersionUID = 1L;
 
    @Inject
-   @TwilioClientToken(client = "#{loginController.userRegistration.lastName}")
+   @TwilioCapabilityToken(client = "#{loginController.userRegistration.lastName}")
    String jsToken;
 
    @Inject
